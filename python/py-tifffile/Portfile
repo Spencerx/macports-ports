@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-tifffile
-version             2025.5.21
+version             2025.6.1
 revision            0
 license             BSD
 maintainers         {mps @Schamschula} openmaintainer
@@ -17,9 +17,9 @@ supported_archs     noarch
 platforms           {darwin any}
 homepage            https://github.com/cgohlke/tifffile/
 
-checksums           rmd160  7eafb5f9f51b328bb1ba7f6bf6b6043ebd39a5d1 \
-                    sha256  49d3ec73fa5aa8735e63626d9d982a7db029b3886da4b23796e1984b1f992b33 \
-                    size    368347
+checksums           rmd160  e2e49699f6553566ba417bb7c1026c2fc7c1aabf \
+                    sha256  63cff7cf7305c26e3f3451c0b05fd95a09252beef4f1663227d4b70cb75c5fdb \
+                    size    369769
 
 python.versions     39 310 311 312 313
 
