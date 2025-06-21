@@ -22,7 +22,7 @@ long_description    {*}${description}
 epoch               1
 
 # Primary release version
-set release_ver     1.4.0
+set release_ver     1.5.0
 
 # Binary compatibility version
 set compat_ver      1.0.0
@@ -34,24 +34,24 @@ subport ${name} {
     # N.B.: That's a nice theory, but neither choice works correctly
     github.tarball_from tarball
     revision            0
-    checksums           rmd160  7869ee1f847476a90364b00550006608d008d653 \
-                        sha256  336e98b306fd3d928b43342664daa550953f8f25233467670486c62544c80f67 \
-                        size    163812
+    checksums           rmd160  02d6f192a75ffacda4530d82464240f404cc224c \
+                        sha256  18f4df8850aebe64f66ed80eae14b50cc87cbe1d1dabfbdd432ff0aaf87b44f4 \
+                        size    214986
 }
 
 subport ${name}-devel {
     conflicts           ${name}
     github.setup        macports macports-legacy-support \
-                        f9b7e0da3919ceb09ca2da8c3bac2aec125fc227
+                        fd2de2493b10902e9f0d46cf314b296c1a6bc3bb
     # Change github.tarball_from to 'releases' or 'archive' next update
     # N.B.: That's a nice theory, but neither choice works correctly
     github.tarball_from tarball
-    version             20250521
+    version             20250608
     revision            0
     livecheck.type      none
-    checksums           rmd160  b8508ff327745c57ee8e95aeaf96ce57b364cb07 \
-                        sha256  1a2158ce5c244e100dcd0903a8ad10c7dd869f1ce824d7421e4fc19865136f6c \
-                        size    208897
+    checksums           rmd160  02d6f192a75ffacda4530d82464240f404cc224c \
+                        sha256  18f4df8850aebe64f66ed80eae14b50cc87cbe1d1dabfbdd432ff0aaf87b44f4 \
+                        size    214986
     set v_split         [split ${release_ver} .]
     set release_ver     [lindex ${v_split} 0].[lindex ${v_split} 1].99
 }

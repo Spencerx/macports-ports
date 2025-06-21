@@ -5,7 +5,7 @@ PortGroup           python 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                py-pikepdf
-version             9.7.0
+version             9.9.0
 revision            0
 categories-append   graphics
 license             MPL-2
@@ -16,12 +16,9 @@ long_description    {*}${description}
 
 python.versions     39 310 311 312 313
 
-# stealth update to switch back to PyPi
-dist_subdir         ${name}/${version}_${revision}
-
-checksums           rmd160  aa5bda00e244d73f7706d76104d8ca1624b069a0 \
-                    sha256  ab54895a246768a2660cafe48052dbf5425c76f6f04e0f53b911df6cfd7e1c95 \
-                    size    2921981
+checksums           rmd160  baea9c53ea1323d5a38714c3e4077bb1a113ed34 \
+                    sha256  948620612c5ee70c14b262a352b1db927386eab741d6ed77fdb1c4c8772734b9 \
+                    size    4544960
 
 if {${name} ne ${subport}} {
     depends_build-append \

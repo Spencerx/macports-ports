@@ -34,19 +34,19 @@ proc helmDistName {arch} {
 
 subport helm-3.18 {
     set baseVersion     3.18
-    set patchNumber     0
+    set patchNumber     3
     revision            0
 
     set armAvailable    yes
 
     checksums           [helmDistName arm64] \
-                        rmd160  3d008948408fc3c3241dea48fcf884667118e2a4 \
-                        sha256  4ce30bd86a3fc4f31d297827a5bf5b10ced8c4da2ff810bf9f53f561dbed7d10 \
-                        size    16871401 \
+                        rmd160  2362b3785f6213840264863553f4afe0f8a87374 \
+                        sha256  3fe3e9739ab3c75d88bfe13e464a79a2a7a804fc692c3258fa6a9d185d53e377 \
+                        size    16879834 \
                         [helmDistName amd64] \
-                        rmd160  041f34ad90602f82ddf0b848eaf69c593fec25b4 \
-                        sha256  2be99836549413c2f0212d644e8740abd8ba5d7f55484c29d3363cea339891d9 \
-                        size    18159455
+                        rmd160  0d4da8fca459f2359327b33bf7511966644bfd32 \
+                        sha256  d186851d40b1999c5d75696bc0b754e4d29e860c8d0cf4c132ac1b1940c5cffc \
+                        size    18176785
 }
 
 subport helm-3.17 {
@@ -366,7 +366,7 @@ if {${subport} == ${name}} {
     PortGroup           obsolete 1.0
 
     replaced_by         ${latestVersion}
-    version             3.18.0
+    version             3.18.3
     revision            0
 
 } elseif {${subport} == "helm_select"} {
