@@ -5,7 +5,7 @@ PortSystem 1.0
 name                python314-devel
 
 # Remember to keep py314-tkinter and py314-gdbm's versions sync'd with this
-version             3.14.0b1
+version             3.14.0b3
 
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          lang
@@ -22,16 +22,15 @@ master_sites        ${homepage}ftp/python/3.14.0/
 
 distname            Python-${version}
 use_xz              yes
-checksums           md5 6a4acdc472468fdee345c7cd1df1ce88 \
-                    rmd160 546d4c6c484ca198746823c49d0a74fcb450d6a9 \
-                    sha256 2ddd30a77c9f62e065ce648664a254b9b0c011bcdaa8c1c2787087e644cbeb39
+checksums           md5 fe1c20dca37feeb82060788d6df42c9d \
+                    rmd160 331825adad2f7eec64a49fbbaf097615bfec8c9d \
+                    sha256 c6f48bf51f01f50d87007a445dd7afe4a4c7a87ab482570be924c1ddfd0d3682
 
 patchfiles          patch-configure.diff \
                     patch-Lib-ctypes-macholib-dyld.py.diff \
                     configure-disable-libuuid.patch \
                     configure-disable-tkinter.patch \
-                    configure-disable-system-libffi.patch \
-                    Lib_Memzero0.c.patch
+                    configure-disable-system-libffi.patch
 
 platform darwin 8 {
     patchfiles-append  patch-no-copyfile-on-Tiger.diff

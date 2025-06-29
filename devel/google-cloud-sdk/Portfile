@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                google-cloud-sdk
-version             523.0.0
+version             528.0.0
 revision            0
 categories          devel python
 license             Apache-2
@@ -21,19 +21,19 @@ supported_archs     i386 x86_64 arm64
 
 if { ${configure.build_arch} eq "i386" } {
     distname        ${name}-${version}-darwin-x86
-    checksums       rmd160  a6406c6d5dda5e91b214e45d346d746d492c0929 \
-                    sha256  10acdbc09b18c2bb8877e31cf4557c42bc23b733e17616ba11cbcc6406543928 \
-                    size    54027922
+    checksums       rmd160  643c942b9491135f0db3c18f5cf570167f6fdf2f \
+                    sha256  02278f8b051b5b11ae0b5c31abdf5ba7d3c0acba35ba5cc1ddfc50aabf2afe36 \
+                    size    54202327
 } elseif { ${configure.build_arch} eq "x86_64" } {
     distname        ${name}-${version}-darwin-x86_64
-    checksums       rmd160  d5ef7113dad7791d5916dccf812201193f989538 \
-                    sha256  e33a1adf893461ecd7d1565a75cf3361f384d6daccd7b0fb468886eefbf9dd89 \
-                    size    55498026
+    checksums       rmd160  a6c5029be140c0861c75512c6c7fa09ff985c094 \
+                    sha256  96d0d697ba970057a155cc6cb54b3bb3daa3ad02ae79e93ab53933c6cfd436ee \
+                    size    55735355
 } elseif { ${configure.build_arch} eq "arm64" } {
     distname        ${name}-${version}-darwin-arm
-    checksums       rmd160  1f93612157fdd023b61af4dc0e078a5465e8714a \
-                    sha256  346c0550daa201a408032c0697326f8bd358e46a407cb0decdc00b257cc0243a \
-                    size    55435938
+    checksums       rmd160  38a15d051098217d666e0944ae4bdd077954256f \
+                    sha256  c8a175347e4a99d3f834c54ab922ba6a5276f6403f7a70c42e77dd3a0cfcf48e \
+                    size    55670081
 }
 
 homepage            https://cloud.google.com/sdk/
@@ -107,6 +107,13 @@ variant skaffold description {Add Skaffold} { dict set variant_to_component skaf
 variant terraform_tools description {Add Terraform Tools} { dict set variant_to_component terraform_tools terraform-tools }
 
 patch {
+    # Make sure the installer script will not attempt to install its own Python,
+    # even though `--install-python false` is passed to it.
+    # This is a workaround for https://issuetracker.google.com/issues/422318565
+    reinplace "s|python_manager.PromptAndInstallPythonOnMac|#python_manager.PromptAndInstallPythonOnMac|" \
+        ${worksrcpath}/lib/googlecloudsdk/core/updater/update_manager.py
+
+    # Define the basic installation command
     set install_command "CLOUDSDK_CONFIG=${worksrcpath}/.config CLOUDSDK_PYTHON=${python.bin} ./install.sh \
         --usage-reporting false \
         --command-completion false \
@@ -114,13 +121,13 @@ patch {
         --quiet \
         --install-python false"
 
+    # Determine flags for installation of additional components
     set additional_components {}
     foreach component_variant [dict keys ${variant_to_component}] {
         if {[variant_isset ${component_variant}]} {
             lappend additional_components [dict get ${variant_to_component} ${component_variant}]
         }
     }
-
     if { [llength ${additional_components}] > 0 } {
         append install_command " --additional-components"
         foreach additional_component ${additional_components} {
@@ -128,6 +135,7 @@ patch {
         }
     }
 
+    # Run installer script
     system -W ${worksrcpath} ${install_command}
 }
 
